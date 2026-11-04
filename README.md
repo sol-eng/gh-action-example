@@ -1,5 +1,11 @@
 # gh-action-example
 
+> [!WARNING]
+> This example fails until you configure it. The repository contains placeholder values
+> (`https://connect.example.com` and `<content-guid>`) that point to no real Connect server. The
+> `publish` workflow runs on every push to `main`, so it fails on each push until you complete
+> [Set up before you use this](#set-up-before-you-use-this).
+
 A basic Palmer Penguins [Shiny for Python](https://shiny.posit.co/py/) app used to test publishing to Posit Connect via GitHub Actions, per the [Publishing from GitHub Actions](https://docs.posit.co/connect/user/publishing-github-actions/index.html) docs.
 
 ## App
@@ -13,6 +19,18 @@ uv venv .venv
 uv pip install -r requirements.txt -p .venv/bin/python
 .venv/bin/python -m shiny run app.py
 ```
+
+## Set up before you use this
+
+If you fork or copy this repository, complete these steps. Until you do, the `publish` workflow fails.
+
+1. Deploy the app to your Connect server once with `rsconnect deploy shiny`. This creates the content item and its GUID (a unique content ID).
+2. In `.github/workflows/publish.yml`, replace `https://connect.example.com` with your Connect server root URL.
+3. In the same file, replace `<content-guid>` with the GUID from step 1.
+4. In Connect, open the content, then Settings, Source, Trusted Publishing. Add a trusted publisher for your repository. Use the identifier form described in [Deployment](#deployment).
+5. Push a commit to `main`. Open the Actions tab in GitHub to make sure that the `publish` run succeeds.
+
+If the run fails, read the log for the `Deploy to Connect` step. The most common causes are a placeholder value that you did not replace and a trusted publisher that does not match your repository.
 
 ## Deployment
 

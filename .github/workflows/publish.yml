@@ -1,3 +1,6 @@
+# This workflow fails until you configure it.
+# Before you use it, replace the placeholder values below (connect-server and content-guid)
+# and set up a trusted publisher in Connect. See "Set up before you use this" in README.md.
 name: publish
 
 on:
