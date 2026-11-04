@@ -24,6 +24,13 @@ uv pip install -r requirements.txt -p .venv/bin/python
 
 If you fork or copy this repository, complete these steps. Until you do, the `publish` workflow fails.
 
+Trusted Publishing needs two things on your Connect server:
+
+- Connect 2026.07.0 or newer.
+- An Enhanced or Advanced license.
+
+If your server does not meet these requirements, the login step fails. In that case, pass `connect-api-key` to `posit-dev/connect-actions/deploy` instead.
+
 1. Deploy the app to your Connect server once with `rsconnect deploy shiny`. This creates the content item and its GUID (a unique content ID).
 2. In `.github/workflows/publish.yml`, replace `https://connect.example.com` with your Connect server root URL.
 3. In the same file, replace `<content-guid>` with the GUID from step 1.
